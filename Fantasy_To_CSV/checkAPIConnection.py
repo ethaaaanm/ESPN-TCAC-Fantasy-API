@@ -1,13 +1,14 @@
 # Basketball API
 from TCAC_Fantasy.basketball import League
-import cookies
+from TCAC_Fantasy.utils import personal_details
 import csv
 
 
 header = []
 
 # Initiate League Info
-league = League(league_id=467491942, year=2024, espn_s2=cookies.espns2, swid=cookies.espns2)
+league = League(league_id=personal_details.league_id, year=personal_details.year, espn_s2=personal_details.espn_s2,
+                swid=personal_details.swid)
 
 teams = league.teams
 
