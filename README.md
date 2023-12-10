@@ -5,4 +5,4 @@ An API to track nba player stats for fantasy try hards. For avid fantasy basketb
 
 
 
-By: Ethan Mah, James Wong and Jordan Lam
+By: Ethan Mah, James Wong, Jordan Lam, and Brendan Ng
