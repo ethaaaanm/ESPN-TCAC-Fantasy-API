@@ -1,11 +1,9 @@
 # Basketball API
-import sys
-sys.path.insert(0,"C:\\Users\\Tim\\Documents\\projects\\ESPN-TCAC-FANTASY-API")
+# import sys
+# sys.path.insert(0,"C:\\Users\\Tim\\Documents\\projects\\ESPN-TCAC-FANTASY-API")
 from TCAC_Fantasy.basketball import League
-import cookies
+from TCAC_Fantasy.utils import personal_details
 import csv
-
-
 
 
 def initialize_header(teams):
@@ -17,8 +15,9 @@ def initialize_header(teams):
     return header
 
 
-
 ''' Creates a list of rows containing each player and their average from each team'''
+
+
 def make_rows(teams):
     rows = []
     # Find the maximum number of players among all teams
@@ -40,6 +39,7 @@ def make_rows(teams):
 
     return rows
 
+
 def total_average_row(teams):
     row = []
     for i in range(len(teams)):
@@ -47,23 +47,17 @@ def total_average_row(teams):
         for player in teams[i].roster:
             total += player.avg_points
         row.append("Total Average")
-        row.append(total/len(teams[i].roster))
+        row.append(total / len(teams[i].roster))
     return row
-            
 
 
 if __name__ == "__main__":
-
-    league = League(league_id = 467491942, year= 2024, espn_s2= cookies.espns2, swid = "47177C6B-491A-49B2-AA74-0FB83657947D")
+    league = League(league_id = personal_details.league_id, year = personal_details.year, espn_s2 = personal_details.espn_s2,
+                    swid = personal_details.swid)
     teams = league.teams
 
-    
     with open('data.csv', 'w', encoding='UTF8', newline='') as f:
         writer = csv.writer(f)
         writer.writerow(initialize_header(teams))
         writer.writerows(make_rows(teams))
         writer.writerow(total_average_row(teams))
-
-
-
-
