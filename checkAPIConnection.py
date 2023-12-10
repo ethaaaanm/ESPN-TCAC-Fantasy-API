@@ -1,10 +1,57 @@
 # Basketball API
 from TCAC_Fantasy.basketball import League
+import cookies
+import csv
+
+
+header = []
 
 # Initiate League Info
-league = League(league_id=467491942, year=2024)
+league = League(league_id=467491942, year=2024, espn_s2=cookies.espns2, swid=cookies.espns2)
 
-print("Testing Successful")
-print(league.league_id, league.year)
+teams = league.teams
 
-# TODO: Clean ReadMe and MetaData
+# team _ team _ team _
+for team in teams:
+    header.append(team)
+    header.append("Average")
+
+
+
+def make_row(teams):
+    rows = []
+    
+    # Find the maximum number of players among all teams
+    max_players = max(len(team.roster) for team in teams)
+
+    for j in range(max_players):
+        row = []
+        for i in range(len(teams)):
+            # Check if the team has enough players
+            if j < len(teams[i].roster):
+                row.append(str(teams[i].roster[j]))
+                row.append(teams[i].roster[j].avg_points)
+            else:
+                # If the team has fewer players, you can append placeholder values or handle it as needed
+                row.append("No Player")
+                row.append(0.0)  # Placeholder for average
+
+        rows.append(row)
+
+    return rows
+
+
+def get_average(players):
+    total = 0
+    for player in players:
+        total += player.avg_points
+    return total / len(players)
+
+with open('data.csv', 'w', encoding='UTF8', newline='') as f:
+    writer = csv.writer(f)
+    writer.writerow(header)
+    writer.writerows(make_row(teams))
+
+
+
+
