@@ -5,4 +5,4 @@ For avid fantasy basketball enthusiasts seeking a competitive edge, an invaluabl
 
 
 
-By: Ethan Mah, James Wong, Jordan Lam and Tim Chang 
+By: Ethan Mah, James Wong and Jordan Lam
